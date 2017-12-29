@@ -28,6 +28,14 @@ NS_ASSUME_NONNULL_END
 
 @end
 
+// Xcode 9 中 手动引入 防止setKey 和 reSetkey报错
+// 解决方案参见（20170916）：https://github.com/ccgus/fmdb/issues/591
+#if defined(SQLITE_HAS_CODEC)
+SQLITE_API int sqlite3_key(sqlite3 *db, const void *pKey, int nKey);
+SQLITE_API int sqlite3_rekey(sqlite3 *db, const void *pKey, int nKey);
+#endif
+
+
 @implementation FMDatabase
 
 // Because these two properties have all of their accessor methods implemented,
